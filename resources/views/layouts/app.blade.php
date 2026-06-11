@@ -15,7 +15,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="/">GonTicket</a>
+            <a class="navbar-brand fw-bold" href="{{ auth()->check() ? (auth()->user()->role === 'admin' ? route('admin.dashboard') : route('dashboard')) : route('landing') }}">
+                GonTicket
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
