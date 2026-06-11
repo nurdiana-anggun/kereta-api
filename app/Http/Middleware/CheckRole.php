@@ -10,19 +10,18 @@ class CheckRole
 {
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        // 1. Pastikan user sudah login
+        // Pastikan user sudah login
         if (!auth()->check()) {
             return redirect()->route('login');
         }
 
-        // 2. Refresh data user agar mengambil nilai terbaru dari DB
+        //  Refresh data user agar mengambil nilai terbaru dari DB
         $user = auth()->user();
         $user->refresh();
 
-        // 3. Debugging (Hapus/comment baris ini jika sudah normal)
-        // dd($user->role, $roles); 
+        //  Debugging (Hapus/comment baris ini jika sudah normal)
 
-        // 4. Cek apakah role diizinkan
+        //Cek apakah role diizinkan
         if (!in_array(trim($user->role), $roles)) {
             return redirect('/dashboard')->with('error', 'Anda tidak memiliki izin akses.');
         }
