@@ -24,8 +24,14 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link" href="/jadwal"><i class="bi bi-calendar-check"></i> Jadwal</a>
+                    
                     @auth
-                        <a class="nav-link" href="{{ route('pemesanan.riwayat') }}"><i class="bi bi-clock-history"></i> Riwayat</a>
+                        @if(auth()->user()->role === 'admin')
+                            <a class="nav-link" href="{{ route('admin.pesanan') }}"><i class="bi bi-clipboard-list"></i> Kelola Pesanan</a>
+                        @else
+                            <a class="nav-link" href="{{ route('pemesanan.riwayat') }}"><i class="bi bi-clock-history"></i> Riwayat</a>
+                        @endif
+
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
                             <button type="submit" class="nav-link btn btn-link text-white border-0" style="text-decoration: none;">
